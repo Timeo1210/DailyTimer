@@ -10,6 +10,7 @@ class AddAlarm extends React.Component {
         this.hoursRef = React.createRef()
         this.minutesRef = React.createRef()
         this.secondsRef = React.createRef()
+        this.titleRef = React.createRef()
 
         this.handleClick = this.handleClick.bind(this)
     }
@@ -43,8 +44,12 @@ class AddAlarm extends React.Component {
 
         const newUnixAlarm = newAlarm.getTime()
 
+        const alarmTitle = this.titleRef.current.value;
+        this.titleRef.current.value = ""
+
         handleAlarmAdd({
-            time: newUnixAlarm
+            time: newUnixAlarm,
+            text: alarmTitle
         })
     }
 
@@ -58,17 +63,25 @@ class AddAlarm extends React.Component {
 
         return (
             <div className={styles.AddAlarm__wrapper}>
-                <select ref={this.hoursRef} defaultValue={date.getHours()} name="Hours">
-                    {hoursOptions}
-                </select>
-                <span>H</span>
-                <select ref={this.minutesRef} defaultValue={date.getMinutes()} name="Minutes">
-                    {minutesOptions}
-                </select>
-                <span>:</span>
-                <select ref={this.secondsRef} defaultValue={date.getSeconds()} name="Seconds">
-                    {secondsOptions}
-                </select>
+                <div className={styles.AddAlarm__wrapper__timeSelection}>
+                    <select ref={this.hoursRef} defaultValue={date.getHours()} name="Hours">
+                        {hoursOptions}
+                    </select>
+                    <span>H</span>
+                    <select ref={this.minutesRef} defaultValue={date.getMinutes()} name="Minutes">
+                        {minutesOptions}
+                    </select>
+                    <span>:</span>
+                    <select ref={this.secondsRef} defaultValue={date.getSeconds()} name="Seconds">
+                        {secondsOptions}
+                    </select>
+                </div>
+                <div className={`input-group ${styles.AddAlarm__wrapper__titleWrapper}`} >
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" >Titre:</span>
+                    </div>
+                    <input ref={this.titleRef} id="alarmTitleInput" type="text" className={`form-control ${styles.AddAlarm__titleWrapper__inputTitle}`} />
+                </div>
                 <button onClick={this.handleClick} className={`btn btn-primary ${styles.AddAlarm__wrapper__button} `}>Ajouter une Alarme</button>
             </div>
         )

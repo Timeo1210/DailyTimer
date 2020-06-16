@@ -9,6 +9,7 @@ class Popup extends React.Component {
         return (
             <div className={styles.Popup__overlay}>
                 <div className={styles.Popup__wrapper}>
+                    <p style={{textAlign: "center"}}>{this.props.playingText}</p>
                     <button onClick={this.props.handleAlarmStop} className={`btn btn-success ${styles.Popup__wrapper__button}`}>Stop</button>
                 </div>
             </div>

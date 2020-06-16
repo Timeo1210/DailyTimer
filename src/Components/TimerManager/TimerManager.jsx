@@ -14,7 +14,7 @@ class TimerManager extends React.Component {
             <div className={styles.TimerManager__wrapper}>
                 <AddAlarm time={time} handleAlarmAdd={handleAlarmAdd} />
                 {alarms.map((alarm, index) => {
-                    return <Alarm key={index} time={alarm.time} handleAlarmDelete={handleAlarmDelete} />
+                    return <Alarm key={index} alarm={alarm} handleAlarmDelete={handleAlarmDelete} />
                 })}
             </div>
         )
