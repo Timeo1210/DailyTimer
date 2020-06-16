@@ -1,0 +1,8 @@
+
+.TimerManager__wrapper {
+    margin-bottom: 2rem;
+}
+
+.TimerManager__wrapper div:nth-child(2) {
+    margin-top: 2rem;
+}
