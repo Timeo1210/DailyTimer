@@ -17,7 +17,7 @@ class Timer extends React.Component {
         const formatedSeconds = this.formatedUnit(date.getSeconds());
 
         return (
-            <div className={styles.Timer__wrapper}>
+            <div id="Timer" className={styles.Timer__wrapper}>
                 <h1 className={styles.Timer__wrapper__timer}>{formatedHours}H{formatedMinutes}:{formatedSeconds}</h1>
             </div>
         )
