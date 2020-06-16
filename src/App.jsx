@@ -25,12 +25,14 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        const localAlarms = JSON.parse(localStorage.getItem('alarms')) || [];
         this.setState({
+            alarms: localAlarms,
             interval: setInterval(
                 this.updateTime,
                 1000
             )
-        })
+        });
     }
 
     componentWillUnmount() {
@@ -45,8 +47,12 @@ class App extends React.Component {
         })
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         const { alarms, time } = this.state;
+
+        if (prevState.alarms.length !== alarms.length) {
+            localStorage.setItem('alarms', JSON.stringify(alarms))
+        }
 
         const truncedTime = Math.trunc(time / 1000)
         for (const index in alarms) {
@@ -56,7 +62,6 @@ class App extends React.Component {
             } 
         }
     }
-
     playAlarm(currentAlarm) {
         this.audioAlarm.play()
         this.handleAlarmDelete(currentAlarm.time)
@@ -76,9 +81,9 @@ class App extends React.Component {
 
     handleAlarmAdd(alarm) {
         const { alarms } = this.state;
-        alarms.push(alarm)
+        const newAlarms = [alarm].concat(alarms)
         this.setState({
-            alarms: alarms
+            alarms: newAlarms
         })
     }
 
@@ -98,6 +103,10 @@ class App extends React.Component {
                 <Timer time={time} />
                 <TimerManager time={time} alarms={alarms} handleAlarmAdd={this.handleAlarmAdd} handleAlarmDelete={this.handleAlarmDelete} />
                 {playing && <Popup handleAlarmStop={this.handleAlarmStop} />}
+                <footer className="footer">
+                    <span className="footer__centeredButton"><a href="#Timer">Centrer sur le timer</a></span>
+                    <span className="footer__credits">Created by <a href="https://github.com/Timeo1210/">Timeo1210</a></span>
+                </footer>
             </>
         )
     }

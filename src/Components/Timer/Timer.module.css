@@ -1,7 +1,7 @@
 
 .Timer__wrapper {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,5 +9,5 @@
 }
 
 .Timer__wrapper__timer {
-    font-size: 6rem;
+    font-size: 7rem;
 }
