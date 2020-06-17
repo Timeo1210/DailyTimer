@@ -20,13 +20,13 @@ class Alarm extends React.Component {
     }
 
     render() {
-        const { alarm } = this.props;
+        const { alarm, index } = this.props;
         const date = new Date(alarm.time);
 
         const formatedHours = this.formatedUnit(date.getHours());
         const formatedMinutes = this.formatedUnit(date.getMinutes());
         const formatedSeconds = this.formatedUnit(date.getSeconds());
-
+        /*
         return (
             <div className={styles.Alarm__wrapper}>
                 <span>{formatedHours}H{formatedMinutes}:{formatedSeconds}</span>
@@ -34,6 +34,15 @@ class Alarm extends React.Component {
                 <button onClick={this.handleClick} className={`btn btn-danger ${styles.Alarm__wrapper__button}`} >Delete</button>
             </div>
         )
+        */
+       return (
+           <tr style={{textAlign: "center"}} className={styles.Alarm__rowWrapper} >
+               <th scope="row">{index + 1}</th>
+               <td><span>{formatedHours}H{formatedMinutes}:{formatedSeconds}</span></td>
+               <td style={{fontSize: "1.2rem"}}>{alarm.text}</td>
+               <td><button onClick={this.handleClick} className={`btn btn-danger ${styles.Alarm__wrapper__button}`} >Delete</button></td>
+           </tr>
+       )
     }
 
 }

@@ -23,8 +23,17 @@
     height: auto;
 }
 
+.AddAlarm__titleWrapper__inputTitle:focus {
+    outline: none;
+}
+
+.AddAlarm__titleWrapper__inputTitle:focus:invalid {
+    border: 2px solid #9c202c;
+}
+
 .AddAlarm__wrapper__button {
     min-width: 125px;
+    max-width: 200px;
     margin-left: 1rem;
 }
 

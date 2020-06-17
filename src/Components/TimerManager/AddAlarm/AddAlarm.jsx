@@ -13,6 +13,7 @@ class AddAlarm extends React.Component {
         this.titleRef = React.createRef()
 
         this.handleClick = this.handleClick.bind(this)
+        this.handleKeyDown = this.handleKeyDown.bind(this)
     }
 
     renderOptions(loopNumber) {
@@ -29,6 +30,10 @@ class AddAlarm extends React.Component {
     handleClick() {
         const { handleAlarmAdd } = this.props;
 
+        const alarmTitle = this.titleRef.current.value;
+        if (alarmTitle.length < 4) return
+        this.titleRef.current.value = ""
+
         const hoursDOM = this.hoursRef.current
         const minutesDOM = this.minutesRef.current
         const secondsDOM = this.secondsRef.current
@@ -44,13 +49,16 @@ class AddAlarm extends React.Component {
 
         const newUnixAlarm = newAlarm.getTime()
 
-        const alarmTitle = this.titleRef.current.value;
-        this.titleRef.current.value = ""
-
         handleAlarmAdd({
             time: newUnixAlarm,
             text: alarmTitle
         })
+    }
+
+    handleKeyDown(event) {
+        if (event.key === 'Enter') {
+            this.handleClick()
+        }
     }
 
     render() {
@@ -80,7 +88,7 @@ class AddAlarm extends React.Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text" >Titre:</span>
                     </div>
-                    <input ref={this.titleRef} id="alarmTitleInput" type="text" className={`form-control ${styles.AddAlarm__titleWrapper__inputTitle}`} />
+                    <input ref={this.titleRef} onKeyDown={this.handleKeyDown} id="alarmTitleInput" type="text" minLength="4" required className={`form-control ${styles.AddAlarm__titleWrapper__inputTitle}`} />
                 </div>
                 <button onClick={this.handleClick} className={`btn btn-primary ${styles.AddAlarm__wrapper__button} `}>Ajouter une Alarme</button>
             </div>

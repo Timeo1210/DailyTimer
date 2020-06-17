@@ -1,12 +1,16 @@
 
 .Alarm__wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 2rem;
-    margin-bottom: 0.7rem;
 }
 
-.Alarm__wrapper__button {
-    margin-left: 1rem;
+.Alarm__rowWrapper > th,
+.Alarm__rowWrapper > td {
+    vertical-align: middle;
+    text-align: center;
 }
+
+.Alarm__rowWrapper :first-child,
+.Alarm__rowWrapper > :nth-child(2) {
+    font-size: 1.5rem;
+}
+

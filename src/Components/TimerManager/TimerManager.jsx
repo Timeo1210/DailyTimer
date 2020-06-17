@@ -13,9 +13,23 @@ class TimerManager extends React.Component {
         return (
             <div className={styles.TimerManager__wrapper}>
                 <AddAlarm time={time} handleAlarmAdd={handleAlarmAdd} />
-                {alarms.map((alarm, index) => {
-                    return <Alarm key={index} alarm={alarm} handleAlarmDelete={handleAlarmDelete} />
-                })}
+                {alarms.length !== 0 && (
+                <table className={`table table-hover ${styles.TimerManager__wrapper__table}`} style={{maxWidth: "500px"}}>
+                    <thead>
+                        <tr style={{textAlign: "center"}}>
+                            <th scope="col" style={{width: "30px"}} >#</th>
+                            <th scope="col" style={{width: "100px"}} >Time</th>
+                            <th scope="col" >Title</th>
+                            <th scope="col" style={{width: "80px"}} >Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {alarms.map((alarm, index) => {
+                            return <Alarm key={index} index={index} alarm={alarm} handleAlarmDelete={handleAlarmDelete} />
+                        })}
+                    </tbody>
+                </table>
+                )}
             </div>
         )
     }
