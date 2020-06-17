@@ -1,8 +1,11 @@
 
 .TimerManager__wrapper {
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.TimerManager__wrapper div:nth-child(2) {
-    margin-top: 2rem;
+.TimerManager__wrapper__table {
+    margin-top: 1rem;
 }

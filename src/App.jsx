@@ -13,7 +13,8 @@ class App extends React.Component {
             time: Date.now(),
             interval: null,
             alarms: [],
-            playingAlarm: false
+            playing: false,
+            playingText: ""
         }
 
         this.audioAlarm = new Audio(`${process.env.PUBLIC_URL}/alarm.mp3`);
@@ -64,10 +65,11 @@ class App extends React.Component {
     }
     playAlarm(currentAlarm) {
         this.audioAlarm.play()
-        this.handleAlarmDelete(currentAlarm.time)
         this.setState({
-            playing: true
+            playing: true,
+            playingText: currentAlarm.text
         })
+        this.handleAlarmDelete(currentAlarm.time)
     }
 
     handleAlarmDelete(alarmTime) {
@@ -96,13 +98,19 @@ class App extends React.Component {
     }
 
     render() {
-        const { time, alarms, playing } = this.state;
+        const { time, alarms, playing, playingText } = this.state;
+
+        const sortedAlarms = alarms.sort((a, b) => {
+            console.log(a)
+            const toReturn = a.time < b.time
+            return toReturn ? -1 : 1;
+        })
 
         return (
             <>
                 <Timer time={time} />
-                <TimerManager time={time} alarms={alarms} handleAlarmAdd={this.handleAlarmAdd} handleAlarmDelete={this.handleAlarmDelete} />
-                {playing && <Popup handleAlarmStop={this.handleAlarmStop} />}
+                <TimerManager time={time} alarms={sortedAlarms} handleAlarmAdd={this.handleAlarmAdd} handleAlarmDelete={this.handleAlarmDelete} />
+                {playing && <Popup playingText={playingText} handleAlarmStop={this.handleAlarmStop} />}
                 <footer className="footer">
                     <span className="footer__centeredButton"><a href="#Timer">Centrer sur le timer</a></span>
                     <span className="footer__credits">Created by <a href="https://github.com/Timeo1210/">Timeo1210</a></span>
