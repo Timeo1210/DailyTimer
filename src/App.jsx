@@ -3,6 +3,7 @@ import React from 'react';
 import Timer from './Components/Timer';
 import TimerManager from './Components/TimerManager';
 import Popup from './Components/Popup';
+import Footer from './Components/Footer';
 
 class App extends React.Component {
 
@@ -11,10 +12,11 @@ class App extends React.Component {
 
         this.state = {
             time: Date.now(),
+            timerSize: 7,
             interval: null,
             alarms: [],
             playing: false,
-            playingText: ""
+            playingText: "",
         }
 
         this.audioAlarm = new Audio(`${process.env.PUBLIC_URL}/alarm.mp3`);
@@ -23,6 +25,7 @@ class App extends React.Component {
         this.handleAlarmDelete = this.handleAlarmDelete.bind(this)
         this.handleAlarmAdd = this.handleAlarmAdd.bind(this)
         this.handleAlarmStop = this.handleAlarmStop.bind(this)
+        this.handleTimerSizeChange = this.handleTimerSizeChange.bind(this)
     }
 
     componentDidMount() {
@@ -97,8 +100,16 @@ class App extends React.Component {
         })
     }
 
+    handleTimerSizeChange(addSize) {
+        const { timerSize } = this.state;
+
+        this.setState({
+            timerSize: timerSize + addSize
+        })
+    }
+
     render() {
-        const { time, alarms, playing, playingText } = this.state;
+        const { time, timerSize, alarms, playing, playingText } = this.state;
 
         const sortedAlarms = alarms.sort((a, b) => {
             console.log(a)
@@ -108,13 +119,10 @@ class App extends React.Component {
 
         return (
             <>
-                <Timer time={time} />
+                <Timer time={time} timerSize={timerSize} />
                 <TimerManager time={time} alarms={sortedAlarms} handleAlarmAdd={this.handleAlarmAdd} handleAlarmDelete={this.handleAlarmDelete} />
                 {playing && <Popup playingText={playingText} handleAlarmStop={this.handleAlarmStop} />}
-                <footer className="footer">
-                    <span className="footer__centeredButton"><a href="#Timer">Centrer sur le timer</a></span>
-                    <span className="footer__credits">Created by <a href="https://github.com/Timeo1210/">Timeo1210</a></span>
-                </footer>
+                <Footer handleTimerSizeChange={this.handleTimerSizeChange} />
             </>
         )
     }

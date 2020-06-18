@@ -1,0 +1,48 @@
+
+.Settings__dropdown {
+    position: absolute;
+    bottom: 24px;
+    width: 260px;
+    transform: translateX(-3px);
+    background-color: #FFF;
+    border: 2px solid #dadada;
+    border-radius: 5px;
+    box-shadow: 13px 11px 21px -8px rgba(0,0,0,0.75);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.1rem 0 0.6rem;
+}
+
+.Settings__dropdown__closeButton {
+    position: absolute;
+    top: -4px;
+    right: 3px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Settings__dropdown__titleSize {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.Settings__dropdown__titleSize button {
+    font-size: 2.1rem;
+    padding: 0rem .4rem;
+    line-height: 1.1;
+    text-align: center;
+    vertical-align: text-top;
+    padding-bottom: 0.2rem;
+    width: 36px;
+}
+
+.Settings__dropdown__titleSize > button:nth-child(2) {
+    padding: 0 1rem;
+}

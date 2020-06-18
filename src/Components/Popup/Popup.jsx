@@ -2,9 +2,11 @@ import React from 'react';
 
 import styles from './Popup.module.css';
 
-class Popup extends React.Component {   
+class Popup extends React.PureComponent {   
 
     render() {
+
+        console.log('render')
 
         return (
             <div className={styles.Popup__overlay}>

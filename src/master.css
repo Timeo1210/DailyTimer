@@ -15,14 +15,29 @@ code {
 .footer {
   display: grid;
   grid-template: 1fr / 1fr 1fr 1fr;
+  margin: 0 0.5rem;
 }
 
 .footer__centeredButton {
   grid-area: 1 / 2 / 2 / 3;
   text-align: center;
+  user-select: none;
 }
 
 .footer__credits {
   grid-area: 1 / 3 / 2 / 4;
   text-align: end;
+}
+
+.footer__settings {
+  color: #007bff;
+  user-select: none;
+}
+.footer__settings:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.footer__settingsWrapper {
+  position: relative;
 }
