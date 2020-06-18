@@ -3,7 +3,7 @@ import React from 'react';
 import Timer from './Components/Timer';
 import TimerManager from './Components/TimerManager';
 import Popup from './Components/Popup';
-import Settings from './Components/Settings';
+import Footer from './Components/Footer';
 
 class App extends React.Component {
 
@@ -17,19 +17,14 @@ class App extends React.Component {
             alarms: [],
             playing: false,
             playingText: "",
-            settingsOpen: false
         }
 
         this.audioAlarm = new Audio(`${process.env.PUBLIC_URL}/alarm.mp3`);
-
-        this.settingsButtonRef = React.createRef()
 
         this.updateTime = this.updateTime.bind(this)
         this.handleAlarmDelete = this.handleAlarmDelete.bind(this)
         this.handleAlarmAdd = this.handleAlarmAdd.bind(this)
         this.handleAlarmStop = this.handleAlarmStop.bind(this)
-        this.handleSettingsClick = this.handleSettingsClick.bind(this)
-        this.handleSettingsClose = this.handleSettingsClose.bind(this)
         this.handleTimerSizeChange = this.handleTimerSizeChange.bind(this)
     }
 
@@ -105,19 +100,6 @@ class App extends React.Component {
         })
     }
 
-    handleSettingsClick() {
-        const { settingsOpen } = this.state;
-        this.setState({
-            settingsOpen: !settingsOpen
-        })
-    }
-
-    handleSettingsClose() {
-        this.setState({
-            settingsOpen: false
-        })
-    }
-
     handleTimerSizeChange(addSize) {
         const { timerSize } = this.state;
 
@@ -127,7 +109,7 @@ class App extends React.Component {
     }
 
     render() {
-        const { time, timerSize, alarms, playing, playingText, settingsOpen } = this.state;
+        const { time, timerSize, alarms, playing, playingText } = this.state;
 
         const sortedAlarms = alarms.sort((a, b) => {
             console.log(a)
@@ -140,14 +122,7 @@ class App extends React.Component {
                 <Timer time={time} timerSize={timerSize} />
                 <TimerManager time={time} alarms={sortedAlarms} handleAlarmAdd={this.handleAlarmAdd} handleAlarmDelete={this.handleAlarmDelete} />
                 {playing && <Popup playingText={playingText} handleAlarmStop={this.handleAlarmStop} />}
-                <footer className="footer">
-                    <div className="footer__settingsWrapper">
-                        {settingsOpen && <Settings settingsButtonRef={this.settingsButtonRef} handleSettingsClose={this.handleSettingsClose} handleTimerSizeChange={this.handleTimerSizeChange}  />}
-                        <span ref={this.settingsButtonRef} onClick={this.handleSettingsClick} className="footer__settings">Paramètres</span>
-                    </div>
-                    <span className="footer__centeredButton"><a href="#Timer">Centrer sur le timer</a></span>
-                    <span className="footer__credits">Created by <a href="https://github.com/Timeo1210/">Timeo1210</a></span>
-                </footer>
+                <Footer handleTimerSizeChange={this.handleTimerSizeChange} />
             </>
         )
     }

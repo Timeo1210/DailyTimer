@@ -7,6 +7,14 @@ import styles from './TimerManager.module.css'
 
 class TimerManager extends React.Component {
 
+    shouldComponentUpdate(nextProps) {
+        const { alarms } = this.props;
+        if (nextProps.alarms === alarms) {
+            return false
+        }
+        return true
+    }
+
     render() {
         const { alarms, time, handleAlarmAdd, handleAlarmDelete } = this.props;
 

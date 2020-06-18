@@ -35,6 +35,7 @@ class Alarm extends React.Component {
             </div>
         )
         */
+
        return (
            <tr style={{textAlign: "center"}} className={styles.Alarm__rowWrapper} >
                <th scope="row">{index + 1}</th>
